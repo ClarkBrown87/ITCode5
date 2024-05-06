@@ -8,12 +8,12 @@ class User(models.Model):
         ('Admin', 'Админ')
     )
 
-    first_name = models.CharField('Имя', max_length=100)
-    last_name = models.CharField('Фамилия', max_length=100)
+    first_name = models.CharField('Имя', max_length=100, default='')
+    last_name = models.CharField('Фамилия', max_length=100, default='')
     patronynic = models.CharField('Отчество', max_length=100, blank=True)
     email = models.EmailField('Электронная почта', unique=True)
     phone = models.CharField('Телефон', max_length=20, blank=True, null=True, unique=True)
-    date_birth = models.DateField('День рождения')
+    date_birth = models.DateField('День рождения', default="2002-10-01")
     position = models.CharField('Доступ', max_length=100, choices=POSITION, default='User')
 
     class Meta:
@@ -38,7 +38,7 @@ class Film(models.Model):
     description = models.TextField('Описание', blank=True)
     genre = models.CharField('Жанр', max_length=100, choices=GENRE, default='Comedy')
     public_date = models.DateField('Дата выпуска', blank=True, null=True)
-    revenue = models.DecimalField('Выручка', max_digits=10, decimal_places=2)
+    revenue = models.DecimalField('Выручка', max_digits=10, decimal_places=2, default='0.00')
 
     class Meta:
         verbose_name = "Фильм"
