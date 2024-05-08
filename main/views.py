@@ -1,8 +1,15 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 from django.utils import timezone
+
+from main import models
 
 
 def index(request):
-    now = timezone.localtime(timezone.now())
-    format_now = now.strftime('%Y-%m-%d %H:%M:%S')
-    return HttpResponse(f'Текущая дата и время {format_now}')
+    film = models.Film.objects.all()
+
+    context = {'film': film,
+               'title': 'Список фильмов',
+               }
+
+    return render(request, template_name='main/index.html', context=context)

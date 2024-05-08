@@ -25,24 +25,28 @@ class User(models.Model):
 
 
 class Film(models.Model):
-    GENRE = (
-        ('Fiction', 'Фантастика'),
-        ('Thriller', 'Триллер'),
-        ('Roman', 'Роман'),
-        ('Detective', 'Детектив'),
-        ('Comedy', 'Комендия')
-    )
-
     name = models.CharField("Название фильма", max_length=50)
     director = models.CharField("Режиссер", max_length=50)
     description = models.TextField('Описание', blank=True)
-    genre = models.CharField('Жанр', max_length=100, choices=GENRE, default='Comedy')
+    genre = models.ForeignKey('Genre', on_delete=models.CASCADE, verbose_name='Жанр', null=True, blank=True)
     public_date = models.DateField('Дата выпуска', blank=True, null=True)
     revenue = models.DecimalField('Выручка', max_digits=10, decimal_places=2, default='0.00')
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d', verbose_name='Фото', blank=True, null=True)
 
     class Meta:
         verbose_name = "Фильм"
         verbose_name_plural = 'Фильмы'
+
+    def __str__(self):
+        return self.name
+
+
+class Genre(models.Model):
+    name = models.CharField('Название жанра', max_length=100)
+
+    class Meta:
+        verbose_name = 'Жанр'
+        verbose_name_plural = 'Жанры'
 
     def __str__(self):
         return self.name
