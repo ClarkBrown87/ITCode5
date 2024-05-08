@@ -1,3 +1,7 @@
+ДЗ №6
+![image](https://github.com/ClarkBrown87/ITCode5/assets/58907830/2f83cd27-6bff-490a-beb7-2e3070ff23ca)
+
+ДЗ №5
 ![image](https://github.com/ClarkBrown87/ITCode5/assets/58907830/39545e58-a16b-4f70-9b75-766291dbb4c4)
 ![image](https://github.com/ClarkBrown87/ITCode5/assets/58907830/ac064dbd-45fb-490c-be96-39d714f8fbae)
 ![image](https://github.com/ClarkBrown87/ITCode5/assets/58907830/c1a4bf83-713b-4fa5-b61e-e76537007012)
