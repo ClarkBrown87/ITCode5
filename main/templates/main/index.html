@@ -1,58 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <title>{{ title }}</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Фильмы</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Главная</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Список фильмов</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+{% block sidebar %}
+<div class="col-md-3">
+    <ul class="list-group">
 
-<div class="container mt-3">
-    <h1>{{ title }}</h1>
-    <div class="row">
-        <div class="col-md-9">
-            {% for item in film %}
-            <div class="card mb-3" style="max-width: 1000px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="{{ item.photo.url }}" alt="..." width="300" height="450">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ item.name }}</h5>
-                            <p class="card-text">{{ item.description }}</p>
-                            <p class="card-text"><small class="text-muted">Режиссер: {{ item.director }}</small>
-                            </p>
-                            <p class="card-text"><small class="text-muted">Выручка {{ item.revenue }}</small></p>
-                            <p class="card-text"><small class="text-muted">Выпущено {{ item.public_date }}</small></p>
-                        </div>
-                    </div>
+        {% for genre in genres %}
+
+        <a href="{% url 'genre' genre.pk %}" class="list-group-item">{{ genre.name }}</a>
+
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="col-md-9">
+    {% for item in film %}
+    <div class="card mb-3" style="max-width: 1000px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{ item.photo.url }}" alt="..." width="300" height="450">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <a href="{{ item.get_absolute_url }}"><h5 class="card-title">{{ item.name }}</h5></a>
+                    <p class="card-text">{{ item.description }}</p>
+                    <p class="card-text"><small class="text-muted">Режиссер: {{ item.director }}</small>
+                    </p>
+                    <p class="card-text"><small class="text-muted">Выручка {{ item.revenue }}</small></p>
+                    <p class="card-text"><small class="text-muted">Выпущено {{ item.public_date }}</small></p>
                 </div>
             </div>
-            {% endfor %}
         </div>
     </div>
+    {% endfor %}
 </div>
-</body>
-</html>
+{% endblock %}
