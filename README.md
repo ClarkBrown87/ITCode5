@@ -1,5 +1,9 @@
+
 ДЗ №8
 ![img.png](img.png)
+
+ДЗ №7, разобрался и добавил get_absolute_url()
+![image](https://github.com/ClarkBrown87/ITCode5/assets/58907830/a7781e40-0a1b-4740-b4d4-478380e847fc)
 
 ДЗ №6
 ![image](https://github.com/ClarkBrown87/ITCode5/assets/58907830/2f83cd27-6bff-490a-beb7-2e3070ff23ca)
