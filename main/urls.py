@@ -3,6 +3,7 @@ from .views import *
 
 urlpatterns = [
     path('', index, name='home'),
-    path('genre/<int:genre_id>', get_genre, name='genre'),
-    path('film/<int:pk>/', film_detail, name='film_detail'),
+    path('genre/<int:pk>/', GenreView.as_view(), name='genr'),
+    path('index/', FilmList.as_view(), name='film'),
+    path('film/<int:pk>/', FilmDetailView.as_view(), name='film_detail'),
 ]

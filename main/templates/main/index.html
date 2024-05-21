@@ -4,9 +4,9 @@
 <div class="col-md-3">
     <ul class="list-group">
 
-        {% for genre in genres %}
+        {% for genr in genres %}
 
-        <a href="{% url 'genre' genre.pk %}" class="list-group-item">{{ genre.name }}</a>
+        <a href="{% url 'genr' genr.pk %}" class="list-group-item">{{ genr.name }}</a>
 
         {% endfor %}
     </ul>
