@@ -1,3 +1,6 @@
+ДЗ №8
+![img.png](img.png)
+
 ДЗ №6
 ![image](https://github.com/ClarkBrown87/ITCode5/assets/58907830/2f83cd27-6bff-490a-beb7-2e3070ff23ca)
 

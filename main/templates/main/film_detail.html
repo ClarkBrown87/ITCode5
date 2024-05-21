@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<H1>2124515</H1>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-9">
+    <div class="card mb-3" style="max-width: 1000px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{ film.photo.url }}" alt="..." width="300" height="450">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <a><h5 class="card-title">{{ film.name }}</h5></a>
+                    <p class="card-text">{{ film.description }}</p>
+                    <p class="card-text"><small class="text-muted">Режиссер: {{ film.director }}</small>
+                    </p>
+                    <p class="card-text"><small class="text-muted">Выручка {{ film.revenue }}</small></p>
+                    <p class="card-text"><small class="text-muted">Выпущено {{ film.public_date }}</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
