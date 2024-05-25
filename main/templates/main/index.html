@@ -1,38 +1,44 @@
 {% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block theme %}
+    <h1>{{ title }}</h1>
+{% endblock %}
 
 {% block sidebar %}
-<div class="col-md-3">
-    <ul class="list-group">
-
-        {% for genr in genres %}
-
-        <a href="{% url 'genr' genr.pk %}" class="list-group-item">{{ genr.name }}</a>
-
-        {% endfor %}
-    </ul>
-</div>
+    <div class="col-md-3">
+        <div class="card-body">
+            <form method="get">
+                {% csrf_token %}
+                {{ filters.form.as_p }}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary">Поиск</button>
+                {% endbuttons %}
+            </form>
+        </div>
+    </div>
 {% endblock %}
 
 {% block content %}
-<div class="col-md-9">
-    {% for item in film %}
-    <div class="card mb-3" style="max-width: 1000px;">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img src="{{ item.photo.url }}" alt="..." width="300" height="450">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <a href="{{ item.get_absolute_url }}"><h5 class="card-title">{{ item.name }}</h5></a>
-                    <p class="card-text">{{ item.description }}</p>
-                    <p class="card-text"><small class="text-muted">Режиссер: {{ item.director }}</small>
-                    </p>
-                    <p class="card-text"><small class="text-muted">Выручка {{ item.revenue }}</small></p>
-                    <p class="card-text"><small class="text-muted">Выпущено {{ item.public_date }}</small></p>
+    <div class="col-md-9">
+        {% for item in film %}
+            <div class="card mb-3" style="max-width: 1000px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ item.photo.url }}" alt="..." width="300" height="450">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <a href="{{ item.get_absolute_url }}"><h5 class="card-title">{{ item.name }}</h5></a>
+                            <p class="card-text">{{ item.description }}</p>
+                            <p class="card-text"><small class="text-muted">Режиссер: {{ item.director }}</small>
+                            </p>
+                            <p class="card-text"><small class="text-muted">Выручка {{ item.revenue }}</small></p>
+                            <p class="card-text"><small class="text-muted">Выпущено {{ item.public_date }}</small></p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
 {% endblock %}
