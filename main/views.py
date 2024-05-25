@@ -1,9 +1,31 @@
-from django.http import HttpResponse
 from django.shortcuts import render
-from django.utils import timezone
 from django.views.generic import ListView, DetailView
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 
-from main import models
+from . import models, filters, serializers
+
+
+class FilmViewSet(ModelViewSet):
+    queryset = models.Film.objects.all()
+    filterset_class = filters.Film
+    serializer_class = serializers.Film
+
+
+class Film(APIView):
+    def get(self, request):
+        qs = models.Film.objects.all()
+        serializer = serializers.Film(qs, many=True)
+
+        return Response(data=serializer.data)
+
+    def post(self, request):
+        serializer = serializers.Film(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response({'message': 'Ok'})
 
 
 class FilmList(ListView):
@@ -11,13 +33,19 @@ class FilmList(ListView):
     context_object_name = "film"
     template_name = 'main/index.html'
 
+    def get_filters(self):
+        return filters.Film(self.request.GET)
+
+    def get_queryset(self):
+        return self.get_filters().qs
+
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super().get_context_data()
 
         genre = models.Genre.objects.all()
 
         context["title"] = 'Список фильмов'
-        context["genres"] = genre
+        context["filters"] = self.get_filters()
 
         return context
 
